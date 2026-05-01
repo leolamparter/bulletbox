@@ -4,31 +4,30 @@ project:
   description: Bulletbox Client
   longDescription: Bulletbox Client Application
   authors:
-    - Leo
+    - leolamparter
   license: Apache-2.0
   vendor: Bulletbox
 
 assemble:
-  jlink:
-    bulletbox:
-      active: NEVER # Disabling jlink to avoid LWJGL module errors
-
   jpackage:
     bulletbox:
       active: ALWAYS
-      # Removed the jlink link to use the standard runtime
-      appVersion: 26.1.1
-      icon: icons.ico
+      # Removed 'appVersion' (Parser error fix)
+      # Removed 'packagers' block from here (it belongs at the root or under 'windows')
       
       mainJar:
         path: "Bulletbox.jar"
       mainClass: Client
 
       windows:
+        active: ALWAYS
         console: true
         shortcut: true
         menu: true
+        # JReleaser 1.24.0 requires types to be a list
+        types: ["exe"] 
         upgradeCode: "bf8a1b5c-48c9-4a9d-b8d4-531637762a12" 
+        icon: icons.ico
 
       fileSets:
         - input: "sfx"
@@ -40,6 +39,9 @@ assemble:
             - "icons.ico"
             - "alive_leonardocapitan.wav"
 
-packagers:
-  exe:
-    active: ALWAYS
+# This block ensures the EXE is actually uploaded to the GitHub Release
+distributions:
+  bulletbox:
+    type: JAVA_BINARY
+    artifacts:
+      - path: "out/jreleaser/assemble/bulletbox/jpackage/bulletbox-{{projectVersion}}.exe"
