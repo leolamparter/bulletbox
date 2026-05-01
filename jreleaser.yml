@@ -7,6 +7,9 @@ project:
     - leolamparter
   license: Apache-2.0
   vendor: Bulletbox
+  copyright: 2025 Bulletbox
+  java:
+    groupId: bulletbox
 
 assemble:
   jpackage:
@@ -16,9 +19,10 @@ assemble:
         path: Bulletbox.jar
       java:
         mainClass: Client
-        options:
+        javaOptions:
           - "-Xmx2G"
-
+      runtimeImage:
+        path: "{{java.home}}"
       fileSets:
         - input: "."
           includes:
@@ -29,7 +33,6 @@ assemble:
           output: "lib"
         - input: "sfx"
           output: "sfx"
-
       windows:
         console: true
         shortcut: true
