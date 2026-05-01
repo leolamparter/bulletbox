@@ -4,32 +4,22 @@ project:
   description: Bulletbox Client
   longDescription: Bulletbox Client Application
   authors:
-    - leolamparter
+    - Leo
   license: Apache-2.0
   vendor: Bulletbox
 
 assemble:
   jlink:
     bulletbox:
-      active: ALWAYS
-      imageName: {{projectName}}-{{projectVersion}}
-      executable: bulletbox
-      # Point to your local lib folder
-      modulePaths:
-        - "lib" 
-      additionalModuleNames:
-        - java.base
-        - java.desktop
-        - java.logging
+      active: NEVER # Disabling jlink to avoid LWJGL module errors
 
   jpackage:
     bulletbox:
       active: ALWAYS
-      jlink: bulletbox
+      # Removed the jlink link to use the standard runtime
       appVersion: 26.1.1
-      icon: icons.ico # Changed from logo.ico to match your 'ls' output
+      icon: icons.ico
       
-      # Matches the Bulletbox.jar in your root directory
       mainJar:
         path: "Bulletbox.jar"
       mainClass: Client
