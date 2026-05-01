@@ -10,6 +10,9 @@ project:
   copyright: 2025 Bulletbox
   java:
     groupId: bulletbox
+  links:
+      homepage: https://boxbullet.github.io/boxbullet
+      documentation: https://boxbullet.github.io/boxbullet
 
 assemble:
   jpackage:
