@@ -20,7 +20,8 @@ assemble:
       java:
         mainClass: Client
         jvmOptions:
-          - "-Xmx2G"
+          universal:
+            - "-Xmx2G"
       runtimeImage:
         path: "{{java.home}}"
       fileSets:
