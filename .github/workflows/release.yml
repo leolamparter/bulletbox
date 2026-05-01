@@ -1,4 +1,4 @@
-name: Bulletbox Release
+name: Bulletbox Windows Release
 
 on:
   push:
@@ -6,20 +6,20 @@ on:
       - "*"
 
 jobs:
-  release:
-    strategy:
-      matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
-
-    runs-on: ${{ matrix.os }}
+  build-windows:
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
       - name: Verify files
-        run: |
-          ls
-          ls lib
+        run: dir
 
       - name: Run JReleaser
         uses: jreleaser/jreleaser-action@v2
