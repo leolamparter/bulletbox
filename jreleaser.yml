@@ -31,7 +31,6 @@ assemble:
           output: "sfx"
 
       windows:
-        active: ALWAYS
         console: true
         shortcut: true
         menu: true
