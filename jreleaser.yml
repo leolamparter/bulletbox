@@ -36,7 +36,6 @@ assemble:
         menu: true
         types:
           - exe
-        upgradeCode: "bf8a1b5c-48c9-4a9d-b8d4-531637762a12"
         icon: icons.ico
 
 distributions:
