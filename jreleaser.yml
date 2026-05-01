@@ -13,7 +13,7 @@ assemble:
     bulletbox:
       active: ALWAYS
       mainJar:
-        - path: Bulletbox.jar
+        path: Bulletbox.jar
       java:
         mainClass: Client
         options:
