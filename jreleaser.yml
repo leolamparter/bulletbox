@@ -22,7 +22,7 @@ assemble:
         jvmOptions:
           universal:
             - "-Xmx2G"
-      runtimeImage:
+      runtimeImages:
         path: "{{java.home}}"
       fileSets:
         - input: "."
