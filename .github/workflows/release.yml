@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # JReleaser needs full history for changelogs
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -18,11 +20,21 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      # --- ADD YOUR BUILD STEP HERE ---
+      # If you use Maven:
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      # OR If you use Gradle:
+      # - name: Build with Gradle
+      #   run: ./gradlew build -x test
+      # --------------------------------
+
       - name: Verify files
-        run: dir
+        run: dir target # Check if the JAR actually exists where JReleaser expects it
 
       - name: Run JReleaser
-        uses: jreleaser/jreleaser-action@v2
+        uses: jreleaser/release-action@v2
         with:
           arguments: full-release
         env:
