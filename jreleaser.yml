@@ -23,7 +23,7 @@ assemble:
           universal:
             - "-Xmx2G"
       runtimeImages:
-        path: "{{java.home}}"
+        - path: "{{java.home}}"
       fileSets:
         - input: "."
           includes:
