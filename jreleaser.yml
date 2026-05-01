@@ -7,9 +7,6 @@ project:
     - leolamparter
   license: Apache-2.0
   vendor: Bulletbox
-  copyright: 2025 Bulletbox
-  java:
-    groupId: bulletbox
   links:
     homepage: https://boxbullet.github.io/boxbullet
     documentation: https://boxbullet.github.io/boxbullet
@@ -25,30 +22,42 @@ assemble:
         jvmOptions:
           universal:
             - "-Xmx2G"
-      runtimeImages:
-        - path: "{{java.home}}"
-          platform: windows-x86_64
+      
+      # File distribution remains the same
       fileSets:
         - input: "."
           includes:
             - "Bulletbox.jar"
             - "icons.ico"
+            - "icons.icns" # Added for Mac
             - "alive_leonardocapitan.wav"
         - input: "lib"
           output: "lib"
         - input: "sfx"
           output: "sfx"
+
       windows:
+        active: ALWAYS
         console: true
         shortcut: true
         menu: true
-        types:
-          - exe
+        types: [exe]
         icon: icons.ico
+
+      osx:
+        active: ALWAYS
+        packageIdentifier: com.bulletbox.client
+        packageName: Bulletbox
+        # Mac requires .icns for icons
+        icon: icons.icns 
+        types: [dmg]
 
 distributions:
   bulletbox:
     type: NATIVE_PACKAGE
     artifacts:
+      # JReleaser will automatically find the correct platform artifact
       - path: "out/jreleaser/assemble/bulletbox/jpackage/{{projectName}}-{{projectVersion}}.exe"
         platform: windows-x86_64
+      - path: "out/jreleaser/assemble/bulletbox/jpackage/{{projectName}}-{{projectVersion}}.dmg"
+        platform: osx-x86_64
