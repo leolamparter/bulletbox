@@ -1,4 +1,4 @@
-name: Bulletbox Multi-Platform Release
+name: Bulletbox Windows Release
 
 on:
   push:
@@ -11,13 +11,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  release:
-    name: Build for ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, macos-13]
+  build-windows:
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +25,12 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Verify Files
+        run: |
+          dir
+          dir lib
+          dir sfx
+
       - name: Assemble
         uses: jreleaser/release-action@v2
         with:
@@ -37,10 +38,27 @@ jobs:
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Full Release
-        if: matrix.os == 'windows-latest'
+      - name: Release
         uses: jreleaser/release-action@v2
         with:
           arguments: full-release
+        env:
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-macos:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Assemble
+        uses: jreleaser/release-action@v2
+        with:
+          arguments: assemble
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
