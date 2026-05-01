@@ -29,7 +29,14 @@ jobs:
           dir lib
           dir sfx
 
-      - name: Run JReleaser
+      - name: Assemble
+        uses: jreleaser/release-action@v2
+        with:
+          arguments: assemble
+        env:
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release
         uses: jreleaser/release-action@v2
         with:
           arguments: full-release

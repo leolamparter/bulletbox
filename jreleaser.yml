@@ -12,36 +12,36 @@ assemble:
   jpackage:
     bulletbox:
       active: ALWAYS
-      # Removed 'appVersion' (Parser error fix)
-      # Removed 'packagers' block from here (it belongs at the root or under 'windows')
-      
-      mainJar:
-        path: "Bulletbox.jar"
-      mainClass: Client
+      mainJar: Bulletbox.jar
+      java:
+        mainClass: Client
+        options:
+          - "-Xmx2G"
+
+      fileSets:
+        - input: "."
+          includes:
+            - "Bulletbox.jar"
+            - "icons.ico"
+            - "alive_leonardocapitan.wav"
+        - input: "lib"
+          output: "lib"
+        - input: "sfx"
+          output: "sfx"
 
       windows:
         active: ALWAYS
         console: true
         shortcut: true
         menu: true
-        # JReleaser 1.24.0 requires types to be a list
-        types: ["exe"] 
-        upgradeCode: "bf8a1b5c-48c9-4a9d-b8d4-531637762a12" 
+        types:
+          - exe
+        upgradeCode: "bf8a1b5c-48c9-4a9d-b8d4-531637762a12"
         icon: icons.ico
 
-      fileSets:
-        - input: "sfx"
-          output: "sfx"
-        - input: "lib"
-          output: "lib"
-        - input: "."
-          includes:
-            - "icons.ico"
-            - "alive_leonardocapitan.wav"
-
-# This block ensures the EXE is actually uploaded to the GitHub Release
 distributions:
   bulletbox:
-    type: JAVA_BINARY
+    type: NATIVE_PACKAGE
     artifacts:
-      - path: "out/jreleaser/assemble/bulletbox/jpackage/bulletbox-{{projectVersion}}.exe"
+      - path: "out/jreleaser/assemble/bulletbox/jpackage/{{projectName}}-{{projectVersion}}.exe"
+        platform: windows-x86_64
