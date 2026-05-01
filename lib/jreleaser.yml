@@ -1,0 +1,17 @@
+project:
+  name: bulletbox
+
+release:
+  github:
+    owner: leolamparter
+    name: bulletbox
+
+assemble:
+  jpackage:
+    bulletbox:
+      active: ALWAYS
+      input: .
+      mainJar: Bulletbox.jar
+      mainClass: Client
+      appVersion: 26.1.1
+      icon: icons.icns
