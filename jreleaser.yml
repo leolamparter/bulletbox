@@ -11,8 +11,8 @@ project:
   java:
     groupId: bulletbox
   links:
-      homepage: https://boxbullet.github.io/boxbullet
-      documentation: https://boxbullet.github.io/boxbullet
+    homepage: https://boxbullet.github.io/boxbullet
+    documentation: https://boxbullet.github.io/boxbullet
 
 assemble:
   jpackage:
