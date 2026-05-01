@@ -10,8 +10,15 @@ assemble:
   jpackage:
     bulletbox:
       active: ALWAYS
-      input: .
       mainJar: Bulletbox.jar
       mainClass: Client
       appVersion: 26.1.1
-      icon: icons.icns
+      icon: logo.ico
+
+      fileSets:
+        - input: .
+          includes:
+            - Bulletbox.jar
+            - lib/**
+            - sfx/**
+            - logo.ico
