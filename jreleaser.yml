@@ -1,24 +1,17 @@
-project:
-  name: bulletbox
-
-release:
-  github:
-    owner: leolamparter
-    name: bulletbox
-
 assemble:
   jpackage:
     bulletbox:
       active: ALWAYS
-      mainJar: Bulletbox.jar
       mainClass: Client
       appVersion: 26.1.1
       icon: logo.ico
 
+      jars:
+        - path: Bulletbox.jar
+
       fileSets:
         - input: .
           includes:
-            - Bulletbox.jar
             - lib/**
             - sfx/**
             - logo.ico
