@@ -19,7 +19,7 @@ assemble:
         path: Bulletbox.jar
       java:
         mainClass: Client
-        javaOptions:
+        jvmOptions:
           - "-Xmx2G"
       runtimeImage:
         path: "{{java.home}}"
