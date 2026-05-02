@@ -45,12 +45,6 @@ assemble:
         types:
           - exe
         icon: icons.ico
-      osx:
-        packageIdentifier: com.bulletbox.client
-        packageName: Bulletbox
-        icon: icons.icns 
-        types:
-          - dmg
 
 distributions:
   bulletbox:
