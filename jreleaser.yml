@@ -58,5 +58,3 @@ distributions:
     artifacts:
       - path: "out/jreleaser/assemble/bulletbox/jpackage/{{projectName}}-{{projectVersion}}.exe"
         platform: windows-x86_64
-      - path: "out/jreleaser/assemble/bulletbox/jpackage/{{projectName}}-{{projectVersion}}.dmg"
-        platform: osx-x86_64
