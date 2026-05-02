@@ -48,7 +48,7 @@ assemble:
 
 distributions:
   bulletbox:
-    type: NATIVE_PACKAGE
+    type: JAVA_BINARY
     artifacts:
       - path: "out/jreleaser/assemble/bulletbox/jpackage/{{projectName}}-{{projectVersion}}.exe"
         platform: windows-x86_64
