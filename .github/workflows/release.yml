@@ -34,13 +34,13 @@ jobs:
       - name: Assemble
         uses: jreleaser/release-action@v2
         with:
-          arguments: assemble
+          arguments: --debug --stacktrace assemble
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
         uses: jreleaser/release-action@v2
         with:
-          arguments: full-release
+          arguments: --debug --stacktrace full-release
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
