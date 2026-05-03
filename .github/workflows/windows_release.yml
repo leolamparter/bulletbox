@@ -40,7 +40,7 @@ jobs:
             --win-console `
             --arguments "--patch-module lib" `
             --vendor "leolamparter" `
-            --app-version "26.1.1b"
+            --app-version "26.1.1"
 
       - name: Upload to Releases
         uses: softprops/action-gh-release@v2
