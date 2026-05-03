@@ -1,0 +1,50 @@
+name: Build Windows EXE
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Prepare Staging Area
+        run: |
+          mkdir input-dir
+          copy Bulletbox.jar input-dir/
+          if (Test-Path lib) { xcopy lib\* input-dir\lib\ /E /I /Y }
+          if (Test-Path fonts) { xcopy fonts\* input-dir\fonts\ /E /I /Y }
+          if (Test-Path sfx) { xcopy sfx\* input-dir\sfx\ /E /I /Y }
+
+      - name: Run JPackage
+        run: |
+          jpackage `
+            --type exe `
+            --dest output-dir `
+            --name "Bulletbox" `
+            --input input-dir `
+            --main-jar Bulletbox.jar `
+            --main-class Client `
+            --win-shortcut `
+            --win-menu `
+            --vendor "leolamparter" `
+            --app-version "26.1.1"
+
+      - name: Upload to Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: output-dir/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
