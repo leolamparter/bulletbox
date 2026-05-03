@@ -31,16 +31,16 @@ jobs:
       - name: Run JPackage
         run: |
           jpackage `
-            --type exe `
+            --type app-image `
             --dest output-dir `
             --name "Bulletbox" `
             --input input-dir `
             --main-jar Bulletbox.jar `
             --main-class Client `
-            --win-shortcut `
-            --win-menu `
+            --win-console `
+            --arguments "--patch-module lib" `
             --vendor "leolamparter" `
-            --app-version "26.1.1"
+            --app-version "26.1.1b"
 
       - name: Upload to Releases
         uses: softprops/action-gh-release@v2
